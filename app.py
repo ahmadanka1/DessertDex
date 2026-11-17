@@ -11,12 +11,21 @@ recipes, index, emb_model = load()   # load once at startup
 
 
 def chat(message, history):
-    text, sources = answer(message, recipes, index, emb_model)
+    message = (message or "").strip()[:300]   # cap input length
+    if not message:
+        return "Please type a question."
+    try:
+        text, sources = answer(message, recipes, index, emb_model)
+    except Exception as e:
+        print("Error:", e)   # shows in the Space logs
+        return "Sorry, the recipe assistant is busy or unavailable right now. Please try again in a minute."
     if sources:
-        links = "\n".join(f"- [{s['name']}]({s['url']})" for s in sources)
+        links = "\n".join(
+            f"- [{s['name']}]({s['url']})" + (f" by {s['author']}" if s.get("author") else "")
+            for s in sources
+        )
         text += f"\n\n**Sources:**\n{links}"
     return text
-
 
 demo = gr.ChatInterface(
     fn=chat,

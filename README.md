@@ -1,3 +1,14 @@
+---
+title: DessertDex
+emoji: 🍰
+colorFrom: yellow
+colorTo: red
+sdk: gradio
+sdk_version: 6.32.0
+app_file: app.py
+pinned: false
+short_description: Dessert recipe assistant with cited sources
+---
 # DessertDex 🍰
 
 A dessert recipe assistant built with retrieval-augmented generation (RAG). Ask for desserts in natural language ("something with apples and cinnamon", "chocolate and peanut butter") and get answers grounded in real recipes, each with a link back to its source.
