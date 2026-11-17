@@ -1,11 +1,10 @@
 import json
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 
 DATA = "data/desserts.jsonl"
 INDEX_OUT = "data/index.faiss"
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 def load_recipes():
@@ -26,13 +25,9 @@ def main():
     texts = [embedding_text(r) for r in recipes]
     print(f"Embedding {len(texts)} recipes...")
 
-    model = SentenceTransformer(MODEL_NAME)
-    vectors = model.encode(
-        texts,
-        batch_size=64,
-        show_progress_bar=True,
-        normalize_embeddings=True,
-    ).astype("float32")
+    model = TextEmbedding("sentence-transformers/all-MiniLM-L6-v2")
+    vectors = np.array(list(model.embed(texts, batch_size=64)), dtype="float32")
+    faiss.normalize_L2(vectors)
 
     index = faiss.IndexFlatIP(vectors.shape[1])  # inner product = cosine on normalized vectors
     index.add(vectors)
