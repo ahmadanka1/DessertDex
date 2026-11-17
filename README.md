@@ -4,7 +4,7 @@ A dessert recipe assistant built with retrieval-augmented generation (RAG). Ask 
 
 **Live app:** [dessertdex.streamlit.app](https://dessertdex-w5dwdsru2wseevzhnz8vsc.streamlit.app/)
 
-![DessertDex answering a chocolate and peanut butter dessert query](docs/screenshot.png)
+![DessertDex answering a chocolate and peanut butter dessert query](docs/screenshot-streamlit.png)
 
 ## What it does
 
