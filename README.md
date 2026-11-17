@@ -1,21 +1,10 @@
----
-title: DessertDex
-emoji: 🍰
-colorFrom: yellow
-colorTo: red
-sdk: gradio
-sdk_version: 6.32.0
-app_file: app.py
-pinned: false
-short_description: Dessert recipe assistant with cited sources
----
 # DessertDex 🍰
 
 A dessert recipe assistant built with retrieval-augmented generation (RAG). Ask for desserts in natural language ("something with apples and cinnamon", "chocolate and peanut butter") and get answers grounded in real recipes, each with a link back to its source.
 
-**Live demo:** _add your Hugging Face Space link here_
+**Live app:** [dessertdex.streamlit.app](https://dessertdex-w5dwdsru2wseevzhnz8vsc.streamlit.app/)
 
-![DessertDex screenshot](docs/screenshot.png)
+![DessertDex answering a chocolate and peanut butter dessert query](docs/screenshot.png)
 
 ## What it does
 
@@ -37,7 +26,7 @@ embed question (all-MiniLM-L6-v2) ──► FAISS similarity search (top 4)
 prompt = rules + retrieved recipes + question
    │
    ▼
-Gemini (free tier) ──► answer with numbered citations ──► Gradio chat UI + source links
+Gemini (free tier) ──► answer with numbered citations ──► Streamlit chat UI + source links
 ```
 
 | Component | Choice |
@@ -45,7 +34,7 @@ Gemini (free tier) ──► answer with numbered citations ──► Gradio cha
 | Embeddings | `sentence-transformers/all-MiniLM-L6-v2` (runs on CPU) |
 | Vector search | FAISS (`IndexFlatIP` on normalized vectors = cosine similarity) |
 | LLM | Gemini Flash-Lite via the Google AI Studio free tier |
-| UI | Gradio |
+| UI | Streamlit |
 | Data | Culinary Recipes Dataset, filtered to desserts |
 
 ## Design decisions
@@ -91,6 +80,7 @@ python -m venv .venv
 # Windows: .venv\Scripts\activate      Mac/Linux: source .venv/bin/activate
 
 pip install -r requirements.txt
+pip install streamlit
 cp .env.example .env        # then add your key (Windows: copy .env.example .env)
 ```
 
@@ -103,10 +93,10 @@ GEMINI_MODEL=gemini-3.1-flash-lite
 
 Model names and free-tier availability change; check AI Studio for what is currently available.
 
-Start the app (the processed recipes and search index are already in `data/`):
+Start the Streamlit app (the processed recipes and search index are already in `data/`):
 
 ```bash
-python app.py
+streamlit run streamlit_app.py
 ```
 
 ### Rebuild the data from scratch (optional)
@@ -124,6 +114,7 @@ python src/evaluate.py        # runs the evaluation
 
 ```
 dessertdex/
+├── streamlit_app.py       # Streamlit chat UI
 ├── app.py                 # Gradio chat UI
 ├── src/
 │   ├── download_data.py   # fetch the source CSV (not stored in this repo)
