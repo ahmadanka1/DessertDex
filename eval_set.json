@@ -1,0 +1,19 @@
+[
+  {"query": "chocolate and peanut butter dessert", "expect_all": ["chocolate", "peanut butter"]},
+  {"query": "apple cinnamon dessert", "expect_all": ["apple", "cinnamon"]},
+  {"query": "banana dessert", "expect_all": ["banana"]},
+  {"query": "lemon dessert", "expect_all": ["lemon"]},
+  {"query": "pumpkin pie", "expect_all": ["pumpkin"]},
+  {"query": "coconut and chocolate", "expect_all": ["coconut", "chocolate"]},
+  {"query": "strawberry and cream cheese", "expect_all": ["strawberr", "cream cheese"]},
+  {"query": "oatmeal raisin cookies", "expect_all": ["oat", "raisin"]},
+  {"query": "dessert with pecans and caramel", "expect_all": ["pecan", "caramel"]},
+  {"query": "how do I fix my car", "expect_none": true},
+  {"query": "capital of France", "expect_none": true},
+  {"query": "how to make pudding", "expect_all": ["pudding"]},
+  {"query": "knafeh", "expect_none": true},
+  {"query": "brigadeiro", "expect_none": true},
+  {"query": "help me write an app", "expect_none": true},
+  {"query": "burger", "expect_none": true},
+  {"query": "how are you", "expect_none": true}
+]
